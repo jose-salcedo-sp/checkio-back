@@ -1,0 +1,28 @@
+[package]
+name = "checkio-back"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum = { version = "0.8.9", features = ["macros"] }
+sqlx = { version = "0.8", features = [
+    "runtime-tokio",
+    "sqlite",
+    "macros",
+    "migrate",
+    "chrono",
+    "uuid",
+] }
+uuid = { version = "1", features = ["v7"] }
+getrandom = { version = "0.4.2" }
+tokio = { version = "1", features = ["full"] }
+dotenvy = "0.15"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2.0.18"
+chrono = { version = "0.4.44", features = ["serde"] }
+argon2 = { version = "0.5", features = ["std"] }
+jsonwebtoken = { version = "10.3.0", features = ["rust_crypto"]}
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter", "json"] }
+tower-http = { version = "0.6", features = ["trace", "cors"] }

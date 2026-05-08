@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS orders (
+    id TEXT PRIMARY KEY NOT NULL,
+    table_number INTEGER NOT NULL,
+    status TEXT NOT NULL DEFAULT 'open' CHECK(status IN ('open', 'closed', 'cancelled')),
+    created_by_id TEXT NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
