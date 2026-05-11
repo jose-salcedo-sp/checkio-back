@@ -1,0 +1,62 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT INTO menu_categories (id, name, description, sort_order, created_by_id)\n         VALUES (?, ?, ?, ?, ?)\n         RETURNING id, name, description, sort_order, is_active, created_by_id, created_at, updated_at",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "name",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "description",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "sort_order",
+        "ordinal": 3,
+        "type_info": "Integer"
+      },
+      {
+        "name": "is_active",
+        "ordinal": 4,
+        "type_info": "Integer"
+      },
+      {
+        "name": "created_by_id",
+        "ordinal": 5,
+        "type_info": "Text"
+      },
+      {
+        "name": "created_at",
+        "ordinal": 6,
+        "type_info": "Datetime"
+      },
+      {
+        "name": "updated_at",
+        "ordinal": 7,
+        "type_info": "Datetime"
+      }
+    ],
+    "parameters": {
+      "Right": 5
+    },
+    "nullable": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "6c4a448a14e153d981e0617fb0aec9fd40f36415393f263edf473a36d12238a2"
+}
