@@ -1,9 +1,16 @@
-use sqlx::{SqlitePool, sqlite::SqlitePoolOptions};
+use sqlx::{
+    SqlitePool,
+    sqlite::{SqliteConnectOptions, SqlitePoolOptions},
+};
+use std::str::FromStr;
 
 pub async fn create_pool(database_url: &str) -> SqlitePool {
+    let options = SqliteConnectOptions::from_str(database_url)
+        .expect("Invalid DATABASE_URL")
+        .foreign_keys(true);
     SqlitePoolOptions::new()
         .max_connections(5)
-        .connect(database_url)
+        .connect_with(options)
         .await
         .expect("Failed to create pool")
 }

@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "SELECT id, table_number, status, created_by_id, created_at, updated_at\n         FROM orders WHERE id = ?",
+  "query": "SELECT id, label, sort_order, is_active, created_at, updated_at\n         FROM tables\n         ORDER BY sort_order ASC, label ASC",
   "describe": {
     "columns": [
       {
@@ -9,19 +9,19 @@
         "type_info": "Text"
       },
       {
-        "name": "table_number",
+        "name": "label",
         "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "sort_order",
+        "ordinal": 2,
         "type_info": "Integer"
       },
       {
-        "name": "status",
-        "ordinal": 2,
-        "type_info": "Text"
-      },
-      {
-        "name": "created_by_id",
+        "name": "is_active",
         "ordinal": 3,
-        "type_info": "Text"
+        "type_info": "Integer"
       },
       {
         "name": "created_at",
@@ -35,7 +35,7 @@
       }
     ],
     "parameters": {
-      "Right": 1
+      "Right": 0
     },
     "nullable": [
       false,
@@ -46,5 +46,5 @@
       false
     ]
   },
-  "hash": "0e9c3688e358a994c0064c1dd770b00fe979be337147f4b8b146f5a2e0f90eb8"
+  "hash": "f0b0ef031b8683811dbebd11618737ba15b70a96e42e228082e29806b5a35939"
 }

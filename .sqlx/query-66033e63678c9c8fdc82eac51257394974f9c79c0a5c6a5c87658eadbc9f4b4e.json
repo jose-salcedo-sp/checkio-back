@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "INSERT INTO orders (id, table_number, status, created_by_id)\n         VALUES (?, ?, 'open', ?)\n         RETURNING id, table_number, status, created_by_id, created_at, updated_at",
+  "query": "SELECT id, table_id, status, created_by_id, created_at, updated_at\n         FROM orders",
   "describe": {
     "columns": [
       {
@@ -9,9 +9,9 @@
         "type_info": "Text"
       },
       {
-        "name": "table_number",
+        "name": "table_id",
         "ordinal": 1,
-        "type_info": "Integer"
+        "type_info": "Text"
       },
       {
         "name": "status",
@@ -35,16 +35,16 @@
       }
     ],
     "parameters": {
-      "Right": 3
+      "Right": 0
     },
     "nullable": [
       false,
-      false,
+      true,
       false,
       false,
       false,
       false
     ]
   },
-  "hash": "f6d0e1f1fbdb352947db571820569bfe02cbbb8a3945732c96f492e1f0699459"
+  "hash": "66033e63678c9c8fdc82eac51257394974f9c79c0a5c6a5c87658eadbc9f4b4e"
 }

@@ -1,0 +1,4 @@
+[env]
+# Use checked-in `.sqlx/` query metadata so `cargo check` / rust-analyzer do not
+# require a migrated DATABASE_URL matching the latest schema.
+SQLX_OFFLINE = "true"

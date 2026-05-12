@@ -12,7 +12,7 @@ use uuid::Uuid;
 pub struct Order {
     pub id: String,
     pub status: String,
-    pub table_number: i64,
+    pub table_id: Option<String>,
     pub created_by_id: String,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
@@ -22,7 +22,7 @@ pub struct Order {
 pub struct OrderResponse {
     pub id: String,
     pub status: String,
-    pub table_number: i64,
+    pub table_id: Option<String>,
     pub created_by_id: String,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
@@ -33,7 +33,7 @@ impl From<Order> for OrderResponse {
         Self {
             id: o.id,
             status: o.status,
-            table_number: o.table_number,
+            table_id: o.table_id,
             created_by_id: o.created_by_id,
             created_at: o.created_at.and_utc(),
             updated_at: o.updated_at.and_utc(),
@@ -43,14 +43,14 @@ impl From<Order> for OrderResponse {
 
 #[derive(Debug, Deserialize)]
 pub struct CreateOrder {
-    pub table_number: i64,
+    pub table_id: Option<String>,
     pub created_by_id: String,
 }
 
 pub async fn list(State(pool): State<SqlitePool>) -> Result<Json<Vec<OrderResponse>>> {
     let orders = sqlx::query_as!(
         Order,
-        "SELECT id, table_number, status, created_by_id, created_at, updated_at
+        "SELECT id, table_id, status, created_by_id, created_at, updated_at
          FROM orders"
     )
     .fetch_all(&pool)
@@ -68,7 +68,7 @@ pub async fn get(
 ) -> Result<Json<OrderResponse>> {
     let order = sqlx::query_as!(
         Order,
-        "SELECT id, table_number, status, created_by_id, created_at, updated_at
+        "SELECT id, table_id, status, created_by_id, created_at, updated_at
          FROM orders WHERE id = ?",
         id
     )
@@ -87,11 +87,11 @@ pub async fn create(
 
     let order = sqlx::query_as!(
         Order,
-        "INSERT INTO orders (id, table_number, status, created_by_id)
+        "INSERT INTO orders (id, table_id, status, created_by_id)
          VALUES (?, ?, 'open', ?)
-         RETURNING id, table_number, status, created_by_id, created_at, updated_at",
+         RETURNING id, table_id, status, created_by_id, created_at, updated_at",
         id,
-        payload.table_number,
+        payload.table_id,
         payload.created_by_id,
     )
     .fetch_one(&pool)

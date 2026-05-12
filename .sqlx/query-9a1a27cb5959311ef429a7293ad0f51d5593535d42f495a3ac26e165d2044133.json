@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "SELECT id, table_number, status, created_by_id, created_at, updated_at\n         FROM orders",
+  "query": "SELECT u.id, u.name, u.email, r.slug as role, u.is_active, u.created_at, u.updated_at\n           FROM users u\n           INNER JOIN roles r ON r.id = u.role_id\n           ORDER BY u.name ASC",
   "describe": {
     "columns": [
       {
@@ -9,28 +9,33 @@
         "type_info": "Text"
       },
       {
-        "name": "table_number",
+        "name": "name",
         "ordinal": 1,
-        "type_info": "Integer"
+        "type_info": "Text"
       },
       {
-        "name": "status",
+        "name": "email",
         "ordinal": 2,
         "type_info": "Text"
       },
       {
-        "name": "created_by_id",
+        "name": "role",
         "ordinal": 3,
         "type_info": "Text"
       },
       {
-        "name": "created_at",
+        "name": "is_active",
         "ordinal": 4,
+        "type_info": "Integer"
+      },
+      {
+        "name": "created_at",
+        "ordinal": 5,
         "type_info": "Datetime"
       },
       {
         "name": "updated_at",
-        "ordinal": 5,
+        "ordinal": 6,
         "type_info": "Datetime"
       }
     ],
@@ -43,8 +48,9 @@
       false,
       false,
       false,
+      false,
       false
     ]
   },
-  "hash": "a965b0443d837e65ff809d5ff689691658cc683c7f3c24457458019a586d4afe"
+  "hash": "9a1a27cb5959311ef429a7293ad0f51d5593535d42f495a3ac26e165d2044133"
 }

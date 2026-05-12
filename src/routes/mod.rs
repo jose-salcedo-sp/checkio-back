@@ -7,6 +7,7 @@ use crate::utils::auth::AuthUser;
 mod menu_item_categories;
 mod menu_items;
 mod orders;
+mod tables;
 mod users;
 mod auth;
 
@@ -24,6 +25,7 @@ fn protected_routes() -> Router<SqlitePool> {
         .nest("/menu_items", menu_item_routes())
         .nest("/menu_item_categories", menu_item_category_routes())
         .nest("/orders", order_routes())
+        .nest("/tables", table_routes())
         .route_layer(middleware::from_extractor::<AuthUser>())
 }
 
@@ -48,6 +50,12 @@ fn order_routes() -> Router<SqlitePool> {
     Router::new()
         .route("/", get(orders::list).post(orders::create))
         .route("/{id}", get(orders::get))
+}
+
+fn table_routes() -> Router<SqlitePool> {
+    Router::new()
+        .route("/", get(tables::list).post(tables::create))
+        .route("/{id}", get(tables::get).patch(tables::update))
 }
 
 fn menu_item_category_routes() -> Router<SqlitePool> {

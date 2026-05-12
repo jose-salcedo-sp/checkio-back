@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "INSERT INTO users (id, name, email, password_hash, role, is_active)\n         VALUES (?, ?, ?, ?, ?, ?)\n         RETURNING id, name, email, role, password_hash, is_active, created_at, updated_at",
+  "query": "SELECT u.id, u.name, u.email, r.slug as role, u.is_active, u.created_at, u.updated_at\n           FROM users u\n           INNER JOIN roles r ON r.id = u.role_id\n           WHERE u.id = ?",
   "describe": {
     "columns": [
       {
@@ -24,31 +24,25 @@
         "type_info": "Text"
       },
       {
-        "name": "password_hash",
-        "ordinal": 4,
-        "type_info": "Text"
-      },
-      {
         "name": "is_active",
-        "ordinal": 5,
+        "ordinal": 4,
         "type_info": "Integer"
       },
       {
         "name": "created_at",
-        "ordinal": 6,
+        "ordinal": 5,
         "type_info": "Datetime"
       },
       {
         "name": "updated_at",
-        "ordinal": 7,
+        "ordinal": 6,
         "type_info": "Datetime"
       }
     ],
     "parameters": {
-      "Right": 6
+      "Right": 1
     },
     "nullable": [
-      false,
       false,
       false,
       false,
@@ -58,5 +52,5 @@
       false
     ]
   },
-  "hash": "41bc1bcc4bf46e6d89ca55d8e649ce477bea33e7e857b7e967be9aa74534dec4"
+  "hash": "abb4788e7142ada3a373b8c1fe8e94840de6ddf116301f72647279f6bed93d9c"
 }
